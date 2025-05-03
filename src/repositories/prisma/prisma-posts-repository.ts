@@ -8,15 +8,17 @@ import { PostsRepository } from '../posts-repository'
 export class PrismaPostsRepository implements PostsRepository {
  
     
-    // nao sei se vai funcionar
-    async searchByUser(userId: string) {
+    async searchByUser(userId: string): Promise<Post[]> {
         const posts = await prisma.post.findMany({
             where: {
                 USER_ID: userId,
             },
-        })
+            orderBy: {
+                date: 'desc', // Ordena pela data de criação em ordem decrescente
+            },
+        });
 
-        return posts
+        return posts;
     }
 
     async findById(id: string) {
@@ -53,5 +55,16 @@ export class PrismaPostsRepository implements PostsRepository {
         })
 
         return post
+    }
+
+
+    async getAllPosts(): Promise<Post[]> {
+        const posts = await prisma.post.findMany({
+            orderBy: {
+                date: 'desc', // Ordena pela data de criação em ordem decrescente
+            },
+        });
+
+        return posts;
     }
 }

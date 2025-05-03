@@ -1,6 +1,6 @@
 import { prisma } from '@/lib/prisma'
 
-import { Prisma } from '@prisma/client'
+import { Prisma,User } from '@prisma/client'
 import { UsersRepository } from '../users-repository'
 
 
@@ -32,5 +32,14 @@ export class PrismaUsersRepository implements UsersRepository {
         })
 
         return user
+    }
+
+    async updateProfileImage(userId: string, profileImage: string): Promise<User> {
+        const updatedUser = await prisma.user.update({
+            where: { id: userId },
+            data: { profileImage },
+        });
+
+        return updatedUser;
     }
 }

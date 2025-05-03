@@ -23,17 +23,6 @@ export async function upload(req: any, reply: any) {
             console.log(part)
         }
     }
-
-
-
-
-
-    
     reply.send()
-
-
-
-
-
 }
 

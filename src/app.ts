@@ -19,8 +19,11 @@ app.register(fastifyJwt, {
 
 app.register(cors, {
   origin: 'http://127.0.0.1:5173',  // ou um array de origens
-  methods: ['GET', 'POST', 'PUT', 'DELETE'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   credentials: true
 })
+
+
+
 
 app.register(appRoutes)
